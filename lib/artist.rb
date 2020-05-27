@@ -1,33 +1,26 @@
 class Artist 
 
   attr_accessor :name
-  
-  @@song_count = 0
-  
+
   def initialize(name)
     @name = name
-    @posts = []
   end
 
-  def posts
-    @posts
+  def add_song(song)
+    song.artist = self
   end
 
-  def add_post(display)
-    @posts.push(display)
-    display.author = self
-    @@post_count += 1
+  def songs
+    Song.all.select {|song| song.artist == self}
   end
 
-  def add_post_by_title(post_title)
-    display = Post.new(post_title)
-    @posts.push(display)
-    display.author = self
-    @@post_count += 1
+  def add_song_by_name(name)
+    song = Song.new(name)
+    add_song(song)
   end
 
-  def self.post_count
-    @@post_count
+  def self.song_count
+    songs.artist.count
   end
 
 end
