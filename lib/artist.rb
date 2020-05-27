@@ -13,16 +13,16 @@ class Artist
     @posts
   end
 
-  def add_post(post)
-    @posts << post
-    post.author = self
+  def add_post(display)
+    @posts.push(display)
+    display.author = self
     @@post_count += 1
   end
 
   def add_post_by_title(post_title)
-    post = Post.new(post_title)
-    @posts << post
-    post.author = self
+    display = Post.new(post_title)
+    @posts.push(display)
+    display.author = self
     @@post_count += 1
   end
 
