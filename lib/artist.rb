@@ -5,26 +5,29 @@ class Artist
   @@song_count = 0
   
   def initialize(name)
-    @name = name 
-    @songs = []
+    @name = name
+    @posts = []
   end
-  
-  def add_song(song)
-    song.artist = self
+
+  def posts
+    @posts
   end
-  
-  def songs 
-    Song.all.select {|song| song.artist == self}
+
+  def add_post(post)
+    @posts << post
+    post.author = self
+    @@post_count += 1
   end
-  
-  def add_song_by_name(name)
-    song = Song.new(name)
-    add_song(song)
-    @@song_count += 1
+
+  def add_post_by_title(post_title)
+    post = Post.new(post_title)
+    @posts << post
+    post.author = self
+    @@post_count += 1
   end
-  
-  def self.song_count
-    return @@song_count
+
+  def self.post_count
+    @@post_count
   end
 
 end
